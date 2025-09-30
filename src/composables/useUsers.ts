@@ -1,5 +1,5 @@
 import { ref, computed } from 'vue'
-import { apiClient, ApiError } from '../api/client'
+import { apiClient, ApiError } from '../../server/api/client'
 import type { User, UserPersona } from '../types'
 
 export function useUsers() {

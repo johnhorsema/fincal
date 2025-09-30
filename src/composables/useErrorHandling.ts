@@ -1,5 +1,5 @@
 import { ref, computed, reactive, readonly } from 'vue'
-import { ApiError } from '../api/client'
+import { ApiError } from '../../server/api/client'
 import { 
   globalErrorHandler, 
   getErrorMessage, 

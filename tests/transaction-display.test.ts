@@ -1,9 +1,9 @@
 import { describe, it, expect, beforeEach, vi } from 'vitest'
 import { mount } from '@vue/test-utils'
 import { ref } from 'vue'
-import PostCard from '@/components/feed/PostCard.vue'
-import TransactionDetailModal from '@/components/feed/TransactionDetailModal.vue'
-import type { Post, Transaction } from '@/types'
+import PostCard from '../src/components/feed/PostCard.vue'
+import TransactionDetailModal from '../src/components/feed/TransactionDetailModal.vue'
+import type { Post, Transaction } from '../src/types'
 
 // Mock composables
 vi.mock('@/composables/usePosts', () => ({

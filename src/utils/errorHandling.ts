@@ -1,5 +1,4 @@
-import type { ErrorResponse } from '../types'
-import { ApiError } from '../api/client'
+import { ApiError } from '../../server/api/client'
 
 // Error severity levels
 export type ErrorSeverity = 'low' | 'medium' | 'high' | 'critical'

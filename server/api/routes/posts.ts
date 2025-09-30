@@ -1,8 +1,8 @@
 import { Hono } from 'hono'
 import { HTTPException } from 'hono/http-exception'
 import { db, posts, users, eq, desc, and } from '../../db'
-import { validateAndSanitizePost, generateId } from '../../utils/validation'
-import type { Post } from '../../types'
+import { validateAndSanitizePost, generateId } from '../../../src/utils/validation'
+import type { Post } from '../../../src/types'
 
 const postsRouter = new Hono()
 

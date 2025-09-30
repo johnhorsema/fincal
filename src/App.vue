@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <SimpleAppLayout>
+    <AppLayout>
       <router-view v-slot="{ Component }">
         <transition
           name="page"
@@ -15,10 +15,10 @@
           <component :is="Component" />
         </transition>
       </router-view>
-    </SimpleAppLayout>
+    </AppLayout>
   </div>
 </template>
 
 <script setup lang="ts">
-import SimpleAppLayout from './components/layout/SimpleAppLayout.vue'
+import AppLayout from './components/layout/AppLayout.vue'
 </script>

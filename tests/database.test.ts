@@ -9,7 +9,7 @@ import {
   validateTransactionBalance,
   generateId,
   formatCurrency
-} from '../db'
+} from '../../server/db'
 
 describe('Database Configuration', () => {
   beforeAll(async () => {

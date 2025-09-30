@@ -3,8 +3,8 @@
  * This can be run to verify that the social feed system works correctly
  */
 
-import { usePosts } from '../composables/usePosts'
-import type { Post } from '../types'
+import { usePosts } from '../../src/composables/usePosts'
+import type { Post } from '../../src/types'
 
 export async function runFeedDemo() {
   console.log('🚀 Starting Social Feed Demo...')

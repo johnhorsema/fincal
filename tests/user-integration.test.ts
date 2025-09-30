@@ -1,9 +1,9 @@
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
-import { db } from '../db/connection'
-import { users } from '../db/schema'
-import { useAuth } from '../composables/useAuth'
+import { db } from '../server/db/connection'
+import { users } from '../server/db/schema'
+import { useAuth } from '../src/composables/useAuth'
 import { eq } from 'drizzle-orm'
-import type { User, UserPersona } from '../types'
+import type { User, UserPersona } from '../src/types'
 
 // Mock localStorage
 const localStorageMock = {

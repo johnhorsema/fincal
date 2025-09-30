@@ -13,8 +13,8 @@ import {
   parseAmount,
   generateId,
   VALIDATION_CONSTANTS
-} from '../utils/validation'
-import type { Post, Transaction, TransactionEntry, Account, User, UserPersona } from '../types'
+} from '../src/utils/validation'
+import type { Post, Transaction, TransactionEntry, Account, User, UserPersona } from '../src/types'
 
 describe('Post Validation', () => {
   it('should validate a valid post', () => {

@@ -1,11 +1,11 @@
 import { describe, it, expect, beforeAll, afterAll, beforeEach } from 'vitest'
 import { mount } from '@vue/test-utils'
 import { createRouter, createWebHistory } from 'vue-router'
-import App from '../App.vue'
-import Home from '../views/Home.vue'
-import { initializeDatabase, closeDatabase } from '../db/connection'
-import { app } from '../api/server'
-import { generateId } from '../utils/validation'
+import App from '../src/App.vue'
+import Home from '../src/views/Home.vue'
+import { initializeDatabase, closeDatabase } from '../server/db/connection'
+import { app } from '../server/api/server'
+import { generateId } from '../src/utils/validation'
 
 // Mock router for testing
 const router = createRouter({

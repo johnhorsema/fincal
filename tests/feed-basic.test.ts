@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { usePosts } from '../composables/usePosts'
+import { usePosts } from '../src/composables/usePosts'
 
 describe('Feed Core Functionality', () => {
   it('should create posts with proper validation', async () => {

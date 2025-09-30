@@ -1,7 +1,7 @@
 import { describe, it, expect, beforeEach, afterEach } from 'vitest'
-import { useAccounts, ACCOUNT_TYPES, ACCOUNT_CATEGORIES } from '@/composables/useAccounts'
-import { initializeDatabase, closeDatabase, db, accounts } from '@/db'
-import type { Account } from '@/types'
+import { useAccounts, ACCOUNT_TYPES, ACCOUNT_CATEGORIES } from '../src/composables/useAccounts'
+import { initializeDatabase, closeDatabase, db, accounts } from '../server/db'
+import type { Account } from '../src/types'
 
 describe('Account Management', () => {
   beforeEach(async () => {

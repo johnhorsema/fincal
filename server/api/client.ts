@@ -1,4 +1,4 @@
-import type { Post, Transaction, Account, User, ErrorResponse } from '../types'
+import type { Post, Transaction, Account, User, ErrorResponse } from '../../src/types'
 
 // API configuration
 const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001/api'

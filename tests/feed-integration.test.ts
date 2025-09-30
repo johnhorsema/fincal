@@ -1,6 +1,6 @@
 import { describe, it, expect, beforeEach } from 'vitest'
-import { usePosts } from '../composables/usePosts'
-import type { Post } from '../types'
+import { usePosts } from '../src/composables/usePosts'
+import type { Post } from '../src/types'
 
 describe('Feed Integration Tests', () => {
   let posts: Post[]

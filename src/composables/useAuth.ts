@@ -1,7 +1,7 @@
 import { ref, computed, watch } from 'vue'
 import type { User, UserPersona } from '../types'
-import { db } from '../db/connection'
-import { users } from '../db/schema'
+import { db } from '../../server/db/connection'
+import { users } from '../../server/db/schema'
 import { eq } from 'drizzle-orm'
 
 // Global auth state

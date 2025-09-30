@@ -1,8 +1,8 @@
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
-import { useTransactions } from '../composables/useTransactions'
-import { usePosts } from '../composables/usePosts'
-import { validateTransaction } from '../utils/validation'
-import type { Post, Transaction, TransactionEntry } from '../types'
+import { useTransactions } from '../src/composables/useTransactions'
+import { usePosts } from '../src/composables/usePosts'
+import { validateTransaction } from '../src/utils/validation'
+import type { Post, Transaction, TransactionEntry } from '../src/types'
 
 // Mock the database
 vi.mock('../db', () => ({
@@ -76,7 +76,7 @@ describe('Transaction Creation Integration', () => {
     expect(validation.balance).toBe(0)
 
     // Mock successful database operations
-    const mockDb = await import('../db')
+    const mockDb = await import('../../server/db')
     vi.mocked(mockDb.db.insert).mockReturnValue({
       values: vi.fn().mockResolvedValue(undefined)
     } as any)
@@ -195,7 +195,7 @@ describe('Transaction Creation Integration', () => {
     expect(validation.balance).toBe(0)
 
     // Mock successful database operations
-    const mockDb = await import('../db')
+    const mockDb = await import('../../server/db')
     vi.mocked(mockDb.db.insert).mockReturnValue({
       values: vi.fn().mockResolvedValue(undefined)
     } as any)
@@ -315,7 +315,7 @@ describe('Transaction Creation Integration', () => {
     }]
 
     // Mock successful database update
-    const mockDb = await import('../db')
+    const mockDb = await import('../../server/db')
     vi.mocked(mockDb.db.update).mockReturnValue({
       set: vi.fn().mockReturnValue({
         where: vi.fn().mockResolvedValue(undefined)
@@ -368,7 +368,7 @@ describe('Post-to-Transaction Workflow', () => {
     }
 
     // Mock successful database operations
-    const mockDb = await import('../db')
+    const mockDb = await import('../../server/db')
     vi.mocked(mockDb.db.insert).mockReturnValue({
       values: vi.fn().mockResolvedValue(undefined)
     } as any)

@@ -1,11 +1,11 @@
 import { describe, it, expect, beforeEach, vi } from 'vitest'
 import { mount } from '@vue/test-utils'
 import { ref } from 'vue'
-import TransactionModal from '../components/feed/TransactionModal.vue'
-import { useTransactions } from '../composables/useTransactions'
-import { useAccounts } from '../composables/useAccounts'
-import { useAuth } from '../composables/useAuth'
-import type { Post, Account, User } from '../types'
+import TransactionModal from '../src/components/feed/TransactionModal.vue'
+import { useTransactions } from '../src/composables/useTransactions'
+import { useAccounts } from '../src/composables/useAccounts'
+import { useAuth } from '../src/composables/useAuth'
+import type { Post, Account, User } from '../src/types'
 
 // Mock the composables
 vi.mock('../composables/useTransactions')

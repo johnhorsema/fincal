@@ -17,9 +17,9 @@ import {
   getRecoveryActions,
   handleAsyncError,
   withErrorHandling
-} from '../utils/errorHandling'
-import { securityMonitor } from '../utils/securityMonitor'
-import { ApiError } from '../api/client'
+} from '../src/utils/errorHandling'
+import { securityMonitor } from '../src/utils/securityMonitor'
+import { ApiError } from '../server/api/client'
 
 describe('Input Sanitization', () => {
   describe('sanitizeText', () => {

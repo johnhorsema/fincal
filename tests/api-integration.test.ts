@@ -1,7 +1,7 @@
 import { describe, it, expect, beforeAll, afterAll, beforeEach } from 'vitest'
-import { app } from '../api/server'
-import { db, users, accounts, posts, transactions, transactionEntries } from '../db'
-import { generateId } from '../utils/validation'
+import { app } from '../server/api/server'
+import { db, users, accounts, posts, transactions, transactionEntries } from '../server/db'
+import { generateId } from '../src/utils/validation'
 
 // Test server instance
 let testServer: { port: number; fetch: typeof app.fetch }
@@ -44,12 +44,12 @@ describe('API Integration Tests', () => {
     // Set up test data
     await db.insert(users).values({
       ...testUser,
-      createdAt: Date.now()
+      createdAt: new Date()
     })
 
     await db.insert(accounts).values([
-      { ...testAccount, createdAt: Date.now() },
-      { ...testAccount2, createdAt: Date.now() }
+      { ...testAccount, createdAt: new Date() },
+      { ...testAccount2, createdAt: new Date() }
     ])
   })
 
@@ -115,7 +115,7 @@ describe('API Integration Tests', () => {
         content: 'Test post for retrieval',
         authorId: testUser.id,
         authorPersona: 'Manager',
-        createdAt: Date.now(),
+        createdAt: new Date(),
         attachments: null,
         transactionId: null
       })
@@ -136,7 +136,7 @@ describe('API Integration Tests', () => {
         content: 'Test post for single retrieval',
         authorId: testUser.id,
         authorPersona: 'Accountant',
-        createdAt: Date.now(),
+        createdAt: new Date(),
         attachments: null,
         transactionId: null
       })
@@ -159,7 +159,7 @@ describe('API Integration Tests', () => {
         content: 'Original content',
         authorId: testUser.id,
         authorPersona: 'Manager',
-        createdAt: Date.now(),
+        createdAt: new Date(),
         attachments: null,
         transactionId: null
       })
@@ -184,7 +184,7 @@ describe('API Integration Tests', () => {
         content: 'Paid $100 for office supplies',
         authorId: testUser.id,
         authorPersona: 'Accountant',
-        createdAt: Date.now(),
+        createdAt: new Date(),
         attachments: null,
         transactionId: null
       })
@@ -226,7 +226,7 @@ describe('API Integration Tests', () => {
         content: 'Test post for transaction',
         authorId: testUser.id,
         authorPersona: 'Accountant',
-        createdAt: Date.now(),
+        createdAt: new Date(),
         attachments: null,
         transactionId: null
       })
@@ -276,11 +276,11 @@ describe('API Integration Tests', () => {
         id: transactionId,
         postId: testPostId,
         description: 'Test transaction for retrieval',
-        date: Date.now(),
+        date: new Date(),
         status: 'pending',
         createdBy: testUser.id,
         approvedBy: null,
-        createdAt: Date.now()
+        createdAt: new Date()
       })
 
       const response = await testServer.fetch(new Request('http://localhost/api/transactions'))
@@ -297,11 +297,11 @@ describe('API Integration Tests', () => {
         id: transactionId,
         postId: testPostId,
         description: 'Test transaction for approval',
-        date: Date.now(),
+        date: new Date(),
         status: 'pending',
         createdBy: testUser.id,
         approvedBy: null,
-        createdAt: Date.now()
+        createdAt: new Date()
       })
 
       const response = await testServer.fetch(new Request(`http://localhost/api/transactions/${transactionId}/approve`, {
@@ -319,11 +319,11 @@ describe('API Integration Tests', () => {
         id: transactionId,
         postId: testPostId,
         description: 'Test transaction for rejection',
-        date: Date.now(),
+        date: new Date(),
         status: 'pending',
         createdBy: testUser.id,
         approvedBy: null,
-        createdAt: Date.now()
+        createdAt: new Date()
       })
 
       const response = await testServer.fetch(new Request(`http://localhost/api/transactions/${transactionId}/reject`, {

@@ -34,7 +34,7 @@
           :class="[
             'group flex items-center px-3 py-3 text-sm font-medium rounded-xl transition-all duration-200 hover:scale-105',
             $route.path === item.href
-              ? 'bg-gradient-to-r from-primary-500 to-primary-600 text-white shadow-md'
+              ? 'bg-black text-white shadow-md'
               : 'text-gray-600 hover:bg-gray-100 hover:text-gray-900'
           ]"
           :style="{ animationDelay: `${index * 50}ms` }"

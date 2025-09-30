@@ -1,11 +1,11 @@
 import { describe, it, expect, beforeEach, vi } from 'vitest'
 import { mount } from '@vue/test-utils'
 import { ref } from 'vue'
-import { usePosts } from '@/composables/usePosts'
-import PostComposer from '@/components/feed/PostComposer.vue'
-import PostCard from '@/components/feed/PostCard.vue'
-import FeedContainer from '@/components/feed/FeedContainer.vue'
-import type { Post, User, UserPersona } from '@/types'
+import { usePosts } from '../src/composables/usePosts'
+import PostComposer from '../src/components/feed/PostComposer.vue'
+import PostCard from '../src/components/feed/PostCard.vue'
+import FeedContainer from '../src/components/feed/FeedContainer.vue'
+import type { Post, User, UserPersona } from '../src/types'
 
 // Mock the composables
 vi.mock('@/composables/usePosts')

@@ -1,13 +1,13 @@
 import { describe, it, expect, beforeAll, afterAll, beforeEach } from 'vitest'
 import { mount } from '@vue/test-utils'
 import { createRouter, createWebHistory } from 'vue-router'
-import { initializeDatabase, closeDatabase } from '../db/connection'
-import { app } from '../api/server'
-import { generateId } from '../utils/validation'
-import FeedContainer from '../components/feed/FeedContainer.vue'
-import PostComposer from '../components/feed/PostComposer.vue'
-import PostCard from '../components/feed/PostCard.vue'
-import TransactionModal from '../components/feed/TransactionModal.vue'
+import { initializeDatabase, closeDatabase } from '../server/db/connection'
+import { app } from '../server/api/server'
+import { generateId } from '../src/utils/validation'
+import FeedContainer from '../src/components/feed/FeedContainer.vue'
+import PostComposer from '../src/components/feed/PostComposer.vue'
+import PostCard from '../src/components/feed/PostCard.vue'
+import TransactionModal from '../src/components/feed/TransactionModal.vue'
 
 describe('Complete User Workflow Integration', () => {
   let testServer: { port: number; fetch: typeof app.fetch }

@@ -1,8 +1,8 @@
 import { Hono } from 'hono'
 import { HTTPException } from 'hono/http-exception'
 import { db, transactions, transactionEntries, posts, accounts, users, eq, desc, and } from '../../db'
-import { validateTransaction, generateId } from '../../utils/validation'
-import type { Transaction, TransactionEntry } from '../../types'
+import { validateTransaction, generateId } from '../../../src/utils/validation'
+import type { Transaction, TransactionEntry } from '../../../src/types'
 
 const transactionsRouter = new Hono()
 

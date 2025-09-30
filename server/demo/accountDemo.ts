@@ -3,8 +3,8 @@
  * This can be run to verify that the account system works correctly
  */
 
-import { initializeDatabase, closeDatabase } from '@/db'
-import { useAccounts } from '@/composables/useAccounts'
+import { initializeDatabase, closeDatabase } from '../db'
+import { useAccounts } from '../../src/composables/useAccounts'
 
 export async function runAccountDemo() {
   console.log('🚀 Starting Account Management Demo...')

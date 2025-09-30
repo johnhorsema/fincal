@@ -1,9 +1,9 @@
 import { describe, it, expect, beforeEach, vi } from 'vitest'
 import { mount } from '@vue/test-utils'
-import UserPersona from '../components/user/UserPersona.vue'
-import PersonaSelector from '../components/user/PersonaSelector.vue'
-import UserProfile from '../components/user/UserProfile.vue'
-import type { UserPersona as UserPersonaType, User } from '../types'
+import UserPersona from '../src/components/user/UserPersona.vue'
+import PersonaSelector from '../src/components/user/PersonaSelector.vue'
+import UserProfile from '../src/components/user/UserProfile.vue'
+import type { UserPersona as UserPersonaType, User } from '../src/types'
 
 // Mock the database connection
 vi.mock('../db/connection', () => ({
