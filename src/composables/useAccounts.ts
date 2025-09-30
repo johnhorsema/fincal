@@ -67,7 +67,7 @@ export function useAccounts() {
         accountsList.value = result
       } else {
         // If grouped, flatten the results
-        accountsList.value = Object.values(result).flat()
+        accountsList.value = Object.values(result).flat() as Account[]
       }
     } catch (err) {
       const errorMessage = err instanceof ApiError ? err.message : 'Failed to fetch accounts'
@@ -87,7 +87,7 @@ export function useAccounts() {
       
       if (!Array.isArray(result)) {
         // Update local state with flattened results
-        accountsList.value = Object.values(result).flat()
+        accountsList.value = Object.values(result).flat() as Account[]
         return result as Record<string, Account[]>
       }
       
@@ -110,7 +110,7 @@ export function useAccounts() {
       const newAccount = await apiClient.createAccount(accountData)
       
       // Add to local state
-      accountsList.value.push(newAccount)
+      accountsList.value.push(newAccount as Account)
 
       return newAccount
     } catch (err) {
@@ -133,7 +133,7 @@ export function useAccounts() {
       // Update local state
       const index = accountsList.value.findIndex((a: Account) => a.id === id)
       if (index !== -1) {
-        accountsList.value[index] = updatedAccount
+        accountsList.value[index] = updatedAccount as Account
       }
 
       return updatedAccount

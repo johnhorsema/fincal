@@ -102,7 +102,7 @@ export function useAuth() {
    */
   async function getUserById(id: string): Promise<User | null> {
     try {
-      const user = await apiClient.request(`/users/${id}`)
+      const user = await apiClient.request<User>(`/users/${id}`)
       return user
     } catch (error) {
       console.error('Failed to get user by ID:', error)

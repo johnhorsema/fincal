@@ -9,9 +9,6 @@ export default defineConfig({
       '@': resolve(__dirname, 'src'),
     },
   },
-  define: {
-    'process.env': 'process.env'
-  },
   server: {
     port: 3000,
     open: true,
@@ -25,20 +22,11 @@ export default defineConfig({
   build: {
     outDir: 'dist',
     sourcemap: process.env.NODE_ENV === 'development',
-    minify: 'terser',
-    terserOptions: {
-      compress: {
-        drop_console: process.env.NODE_ENV === 'production',
-        drop_debugger: true,
-      },
-    },
     rollupOptions: {
       external: ['server/**/*'],
       output: {
         manualChunks: {
           vendor: ['vue', 'vue-router'],
-          ui: ['@headlessui/vue', '@heroicons/vue'],
-          utils: ['date-fns', 'lodash-es'],
         },
       },
     },
