@@ -659,7 +659,7 @@ export interface RecoveryAction {
   action: () => void | Promise<void>
 }
 
-export function createRecoveryActions(error: Error, context: string): RecoveryAction[] {
+export function createRecoveryActions(error: Error): RecoveryAction[] {
   const actions: RecoveryAction[] = []
 
   // Network errors

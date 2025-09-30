@@ -70,7 +70,7 @@
         <div class="ml-3">
           <p class="text-sm text-red-800">{{ error }}</p>
           <button
-            @click="fetchAccounts"
+            @click="() => fetchAccounts()"
             class="mt-2 text-sm text-red-600 hover:text-red-500 underline"
           >
             Try again

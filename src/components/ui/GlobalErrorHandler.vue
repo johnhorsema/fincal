@@ -38,9 +38,9 @@
               </p>
               
               <!-- Recovery actions -->
-              <div v-if="error.recoveryActions.length > 0" class="mt-3 flex flex-wrap gap-2">
+              <div v-if="error.retryable && getRecoveryActions(error).length > 0" class="mt-3 flex flex-wrap gap-2">
                 <button
-                  v-for="action in error.recoveryActions.slice(0, 2)"
+                  v-for="action in getRecoveryActions(error)"
                   :key="action.label"
                   @click="executeAction(action, error)"
                   :class="[
@@ -107,7 +107,8 @@
         
         <div class="flex space-x-3">
           <button
-            v-for="action in criticalError.recoveryActions"
+            v-for="action in getRecoveryActions(criticalError)"
+            v-if="criticalError.retryable && getRecoveryActions(criticalError).length > 0"
             :key="action.label"
             @click="executeAction(action, criticalError)"
             :class="[
@@ -130,9 +131,10 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted, onUnmounted, h } from 'vue'
+import { ref, computed, onMounted, h } from 'vue'
 import { useGlobalErrorHandler } from '../../composables/useErrorHandling'
 import type { EnhancedError, RecoveryAction } from '../../utils/errorHandling'
+import { getRecoveryActions } from '../../utils/errorHandling'
 
 interface ErrorNotification extends EnhancedError {
   autoDismiss: boolean
@@ -141,7 +143,7 @@ interface ErrorNotification extends EnhancedError {
 }
 
 // Composables
-const { errors, showError, hideError, clearErrors } = useGlobalErrorHandler()
+const { errors, clearErrors } = useGlobalErrorHandler()
 
 // Component state
 const notifications = ref<ErrorNotification[]>([])
@@ -239,7 +241,7 @@ const getErrorIcon = (severity: string) => {
     high: ErrorIcon,
     critical: ErrorIcon
   }
-  return icons[severity] || InfoIcon
+  return icons[severity as keyof typeof icons] || InfoIcon
 }
 
 const getErrorTitle = (error: ErrorNotification): string => {
@@ -330,7 +332,7 @@ const clearAllErrors = () => {
 // Lifecycle
 onMounted(() => {
   // Subscribe to global error events
-  const unsubscribe = errors.value.forEach(error => addError(error))
+  errors.value.forEach(error => addError(error))
   
   // Listen for new errors
   window.addEventListener('error', (event) => {

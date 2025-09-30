@@ -25,9 +25,9 @@ class PerformanceMonitor {
           for (const entry of list.getEntries()) {
             if (entry.entryType === 'navigation') {
               const navEntry = entry as PerformanceNavigationTiming
-              this.recordMetric('page_load_time', navEntry.loadEventEnd - navEntry.navigationStart, 'timing')
-              this.recordMetric('dom_content_loaded', navEntry.domContentLoadedEventEnd - navEntry.navigationStart, 'timing')
-              this.recordMetric('first_paint', navEntry.responseStart - navEntry.navigationStart, 'timing')
+              this.recordMetric('page_load_time', navEntry.loadEventEnd - navEntry.startTime, 'timing')
+              this.recordMetric('dom_content_loaded', navEntry.domContentLoadedEventEnd - navEntry.startTime, 'timing')
+              this.recordMetric('first_paint', navEntry.responseStart - navEntry.startTime, 'timing')
             }
           }
         })

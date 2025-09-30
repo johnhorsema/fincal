@@ -34,8 +34,8 @@
                 Please correct the following errors:
               </h3>
               <ul class="text-sm text-red-700 space-y-1">
-                <li v-for="(error, field) in formErrors" :key="field" class="flex items-start space-x-2">
-                  <span class="font-medium">{{ getFieldLabel(field) }}:</span>
+                <li v-for="(error, field) in formErrors" :key="String(field)" class="flex items-start space-x-2">
+                  <span class="font-medium">{{ getFieldLabel(String(field)) }}:</span>
                   <span v-if="Array.isArray(error)">{{ error[0] }}</span>
                   <span v-else>{{ error }}</span>
                 </li>
@@ -54,9 +54,9 @@ import { useErrorHandling, type ValidationRule } from '../../composables/useErro
 import { 
   validateAndSanitizePost, 
   validateAndSanitizeAccount, 
-  validateAndSanitizeUser,
-  type ValidationResult 
+  validateAndSanitizeUser
 } from '../../utils/validation'
+import type { ValidationResult } from '../../types'
 
 interface Props {
   modelValue?: Record<string, any>
@@ -89,7 +89,7 @@ const {
   setFieldError,
   clearFieldError,
   clearFormErrors,
-  validateField,
+
   validateForm: validateFormFields
 } = useErrorHandling()
 
@@ -115,8 +115,12 @@ const getFieldLabel = (field: string): string => {
     .trim()
 }
 
-const getFieldError = (field: string): string | string[] | undefined => {
-  return formErrors.value[field]
+const getFieldError = (field: string): string[] | undefined => {
+  const error = formErrors.value[field]
+  if (Array.isArray(error)) {
+    return error as string[]
+  }
+  return error ? [error as string] : undefined
 }
 
 const validateEntitySpecific = (data: Record<string, any>): ValidationResult & { sanitized?: Record<string, any> } => {
@@ -136,7 +140,7 @@ const validateEntitySpecific = (data: Record<string, any>): ValidationResult & {
         const isValid = validateFormFields(data, props.rules)
         return { 
           isValid, 
-          errors: isValid ? [] : Object.values(formErrors.value).flat(),
+          errors: isValid ? [] : Object.values(formErrors.value).flat().filter((error): error is string => typeof error === 'string'),
           sanitized: data 
         }
       }
@@ -178,7 +182,11 @@ const validateForm = async (): Promise<{ isValid: boolean; sanitized?: Record<st
     hasBeenValidated.value = true
     
     // Emit validation result
-    emit('validate', result.isValid, formErrors.value)
+    const errorRecord: Record<string, string | string[]> = {}
+    Object.entries(formErrors.value).forEach(([key, value]) => {
+      errorRecord[key] = Array.isArray(value) ? value : [value]
+    })
+    emit('validate', result.isValid, errorRecord)
     
     // Emit sanitized data if available
     if (result.sanitized && props.sanitize) {

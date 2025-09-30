@@ -92,8 +92,8 @@ export function closeDatabase() {
 // Health check function
 export function checkDatabaseHealth(): boolean {
   try {
-    const result = sqlite.prepare('SELECT 1 as health').get()
-    return result && (result as any).health === 1
+    const result = sqlite.prepare('SELECT 1 as health').get() as { health: number } | undefined
+    return Boolean(result && result.health === 1)
   } catch (error) {
     console.error('Database health check failed:', error)
     return false

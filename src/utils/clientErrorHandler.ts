@@ -1,4 +1,4 @@
-import type { Ref, ComputedRef } from 'vue'
+import { ref, type Ref, type ComputedRef } from 'vue'
 import { globalErrorHandler, type EnhancedError } from './errorHandling'
 import { securityMonitor } from './securityMonitor'
 
@@ -24,12 +24,12 @@ class ClientErrorHandler {
   
   constructor() {
     // Initialize state - will be properly set up when Vue is available
-    this.state = { value: {
+    this.state = ref({
       hasError: false,
       errors: [],
       isOnline: typeof navigator !== 'undefined' ? navigator.onLine : true,
       retryQueue: []
-    }} as Ref<ClientErrorState>
+    })
     
     this.setupEventListeners()
   }

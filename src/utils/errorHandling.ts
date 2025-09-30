@@ -1,4 +1,4 @@
-import { ApiError } from '../../server/api/client'
+import { ApiError } from '../api/client'
 
 // Error severity levels
 export type ErrorSeverity = 'low' | 'medium' | 'high' | 'critical'

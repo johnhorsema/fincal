@@ -1,5 +1,5 @@
 import { sqliteTable, text, integer, real, unique } from 'drizzle-orm/sqlite-core'
-import { relations } from 'drizzle-orm'
+import { relations, sql } from 'drizzle-orm'
 
 // Users table
 export const users = sqliteTable('users', {
@@ -7,7 +7,7 @@ export const users = sqliteTable('users', {
   name: text('name').notNull(),
   email: text('email').notNull().unique(),
   personas: text('personas'), // JSON array
-  createdAt: integer('created_at', { mode: 'timestamp' }).notNull().default(Date.now()),
+  createdAt: integer('created_at', { mode: 'timestamp' }).notNull().default(sql`(unixepoch())`),
 })
 
 // Accounts table
@@ -17,7 +17,7 @@ export const accounts = sqliteTable('accounts', {
   type: text('type').notNull(), // asset, liability, equity, revenue, expense
   category: text('category').notNull(),
   isActive: integer('is_active', { mode: 'boolean' }).notNull().default(true),
-  createdAt: integer('created_at', { mode: 'timestamp' }).notNull().default(Date.now()),
+  createdAt: integer('created_at', { mode: 'timestamp' }).notNull().default(sql`(unixepoch())`),
 }, (table) => ({
   uniqueNameType: unique().on(table.name, table.type),
 }))
@@ -28,7 +28,7 @@ export const posts = sqliteTable('posts', {
   content: text('content').notNull(),
   authorId: text('author_id').notNull().references(() => users.id),
   authorPersona: text('author_persona').notNull(),
-  createdAt: integer('created_at', { mode: 'timestamp' }).notNull().default(Date.now()),
+  createdAt: integer('created_at', { mode: 'timestamp' }).notNull().default(sql`(unixepoch())`),
   attachments: text('attachments'), // JSON array
   transactionId: text('transaction_id'),
 })
@@ -42,7 +42,7 @@ export const transactions = sqliteTable('transactions', {
   status: text('status').notNull().default('pending'), // pending, approved, rejected
   createdBy: text('created_by').notNull().references(() => users.id),
   approvedBy: text('approved_by').references(() => users.id),
-  createdAt: integer('created_at', { mode: 'timestamp' }).notNull().default(Date.now()),
+  createdAt: integer('created_at', { mode: 'timestamp' }).notNull().default(sql`(unixepoch())`),
 })
 
 // Transaction entries table
@@ -52,7 +52,7 @@ export const transactionEntries = sqliteTable('transaction_entries', {
   accountId: text('account_id').notNull().references(() => accounts.id),
   debitAmount: real('debit_amount'),
   creditAmount: real('credit_amount'),
-  createdAt: integer('created_at', { mode: 'timestamp' }).notNull().default(Date.now()),
+  createdAt: integer('created_at', { mode: 'timestamp' }).notNull().default(sql`(unixepoch())`),
 })
 
 // Define relationships

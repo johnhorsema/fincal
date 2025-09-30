@@ -253,7 +253,7 @@ const emit = defineEmits<{
 }>()
 
 // Composables
-const { suggestsFinancialActivity } = usePosts()
+const { suggestsFinancialActivityLocal } = usePosts()
 const { getTransaction, calculateTransactionTotals } = useTransactions()
 const { accountsList } = useAccounts()
 
@@ -263,7 +263,7 @@ const transactionTotals = ref<{ totalDebits: number; totalCredits: number; balan
 const isTransactionExpanded = ref(false)
 
 // Computed properties
-const suggestsFinancial = computed(() => suggestsFinancialActivity(props.post.content))
+const suggestsFinancial = computed(() => suggestsFinancialActivityLocal(props.post.content))
 
 const transactionStatusConfig = computed(() => {
   if (!transactionDetails.value) return null

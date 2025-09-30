@@ -109,7 +109,7 @@ const isTransactionDetailModalOpen = ref(false)
 const selectedTransactionId = ref<string | null>(null)
 
 // Methods
-const handlePostCreated = (post: Post) => {
+const handlePostCreated = () => {
   // Post created successfully - could add toast notification here
 }
 
@@ -181,11 +181,11 @@ const handleTransactionUpdated = async (transaction: Transaction) => {
   }
 }
 
-const handleTransactionApproved = (transactionId: string) => {
+const handleTransactionApproved = () => {
   // Transaction approved
 }
 
-const handleTransactionRejected = (transactionId: string) => {
+const handleTransactionRejected = () => {
   // Transaction rejected
 }
 

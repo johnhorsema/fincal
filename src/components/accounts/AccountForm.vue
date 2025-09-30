@@ -131,7 +131,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, watch, onMounted } from 'vue'
+import { ref, computed, watch } from 'vue'
 import { useAccounts, ACCOUNT_TYPES, ACCOUNT_CATEGORIES, type AccountType } from '@/composables/useAccounts'
 import { useErrorHandling } from '@/composables/useErrorHandling'
 import FormValidator from '@/components/ui/FormValidator.vue'
@@ -153,7 +153,7 @@ const props = withDefaults(defineProps<Props>(), {
 
 const emit = defineEmits<Emits>()
 
-const { validateAccount } = useAccounts()
+const { } = useAccounts()
 const { handleFormSubmit } = useErrorHandling()
 
 // Form state
@@ -187,7 +187,7 @@ const availableCategories = computed(() => {
 })
 
 // Validation handlers
-const onValidate = (isValid: boolean, errors: Record<string, string | string[]>) => {
+const onValidate = (isValid: boolean) => {
   isFormValid.value = isValid
 }
 

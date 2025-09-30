@@ -55,7 +55,7 @@ export async function seedAccounts() {
       type: account.type,
       category: account.category,
       isActive: true,
-      createdAt: Date.now()
+      createdAt: new Date()
     }))
 
     await db.insert(accounts).values(accountsToInsert)

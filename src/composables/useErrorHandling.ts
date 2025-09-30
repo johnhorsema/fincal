@@ -1,5 +1,5 @@
 import { ref, computed, reactive, readonly } from 'vue'
-import { ApiError } from '../../server/api/client'
+import { ApiError } from '../api/client'
 import { 
   globalErrorHandler, 
   getErrorMessage, 
@@ -402,7 +402,7 @@ export function useGlobalErrorHandler() {
   const currentError = ref<EnhancedError | null>(null)
 
   // Subscribe to global error handler
-  const unsubscribe = globalErrorHandler.getErrorLogger()
+  globalErrorHandler.getErrorLogger()
 
   const showError = (error: EnhancedError) => {
     errors.value.unshift(error)

@@ -1,8 +1,6 @@
 import { ref, computed, watch } from 'vue'
 import type { User, UserPersona } from '../types'
-import { db } from '../../server/db/connection'
-import { users } from '../../server/db/schema'
-import { eq } from 'drizzle-orm'
+import { apiClient } from '../api/client'
 
 // Global auth state
 const currentUser = ref<User | null>(null)
@@ -100,20 +98,12 @@ export function useAuth() {
   }
   
   /**
-   * Get user by ID from database
+   * Get user by ID from API
    */
   async function getUserById(id: string): Promise<User | null> {
     try {
-      const result = await db.select().from(users).where(eq(users.id, id)).limit(1)
-      if (result.length === 0) return null
-      
-      const user = result[0]
-      return {
-        id: user.id,
-        name: user.name,
-        email: user.email,
-        personas: user.personas ? JSON.parse(user.personas) : []
-      }
+      const user = await apiClient.request(`/users/${id}`)
+      return user
     } catch (error) {
       console.error('Failed to get user by ID:', error)
       return null
@@ -121,20 +111,12 @@ export function useAuth() {
   }
   
   /**
-   * Get user by email from database
+   * Get user by email from API
    */
   async function getUserByEmail(email: string): Promise<User | null> {
     try {
-      const result = await db.select().from(users).where(eq(users.email, email)).limit(1)
-      if (result.length === 0) return null
-      
-      const user = result[0]
-      return {
-        id: user.id,
-        name: user.name,
-        email: user.email,
-        personas: user.personas ? JSON.parse(user.personas) : []
-      }
+      const users = await apiClient.getUsers()
+      return users.find((user: User) => user.email === email) || null
     } catch (error) {
       console.error('Failed to get user by email:', error)
       return null
@@ -146,22 +128,8 @@ export function useAuth() {
    */
   async function createUser(userData: { name: string; email: string; personas: UserPersona[] }): Promise<User | null> {
     try {
-      const newUser = {
-        id: crypto.randomUUID(),
-        name: userData.name,
-        email: userData.email,
-        personas: JSON.stringify(userData.personas),
-        createdAt: Date.now()
-      }
-      
-      await db.insert(users).values(newUser)
-      
-      return {
-        id: newUser.id,
-        name: newUser.name,
-        email: newUser.email,
-        personas: userData.personas
-      }
+      const user = await apiClient.createUser(userData)
+      return user
     } catch (error) {
       console.error('Failed to create user:', error)
       return null
@@ -173,13 +141,7 @@ export function useAuth() {
    */
   async function getAllUsers(): Promise<User[]> {
     try {
-      const result = await db.select().from(users)
-      return result.map(user => ({
-        id: user.id,
-        name: user.name,
-        email: user.email,
-        personas: user.personas ? JSON.parse(user.personas) : []
-      }))
+      return await apiClient.getUsers()
     } catch (error) {
       console.error('Failed to get all users:', error)
       return []

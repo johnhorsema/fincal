@@ -40,7 +40,7 @@
             {{ ACCOUNT_TYPES[type] }}
           </div>
           <button
-            v-for="(account, index) in accounts"
+            v-for="account in accounts"
             :key="account.id"
             type="button"
             :class="[
@@ -91,7 +91,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, watch, nextTick } from 'vue'
+import { ref, computed, watch } from 'vue'
 import { useAccounts, ACCOUNT_TYPES, type AccountType } from '@/composables/useAccounts'
 import type { Account } from '@/types'
 

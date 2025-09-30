@@ -73,10 +73,10 @@
               <div class="flex items-center space-x-3">
                 <div :class="[
                   'w-3 h-3 rounded-full',
-                  statusConfig.dotColor
+                  statusConfig?.dotColor || 'bg-gray-500'
                 ]"></div>
                 <div>
-                  <span class="font-medium text-gray-900">{{ statusConfig.label }}</span>
+                  <span class="font-medium text-gray-900">{{ statusConfig?.label || 'Unknown' }}</span>
                   <p v-if="transaction.approvedBy" class="text-sm text-gray-600 mt-1">
                     Approved by {{ transaction.approvedBy }}
                   </p>

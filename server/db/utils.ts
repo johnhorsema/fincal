@@ -1,6 +1,5 @@
 import { db } from './connection'
 import { users, accounts, posts, transactions, transactionEntries } from './schema'
-import { eq, and, desc, asc } from 'drizzle-orm'
 
 // Utility functions for database operations
 
@@ -57,7 +56,7 @@ export async function seedDatabase() {
         { id: generateId(), name: 'Marketing', role: 'marketing' },
         { id: generateId(), name: 'Sales', role: 'sales' }
       ]),
-      createdAt: getCurrentTimestamp()
+      createdAt: new Date()
     }
     
     await db.insert(users).values(defaultUser).onConflictDoNothing()
@@ -90,7 +89,7 @@ export async function seedDatabase() {
     ].map(account => ({
       ...account,
       isActive: true,
-      createdAt: getCurrentTimestamp()
+      createdAt: new Date()
     }))
     
     for (const account of defaultAccounts) {

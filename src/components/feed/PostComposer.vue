@@ -83,7 +83,7 @@ const emit = defineEmits<{
 }>()
 
 // Composables
-const { createPost, suggestsFinancialActivity } = usePosts()
+const { createPost, suggestsFinancialActivityLocal } = usePosts()
 const { currentUser, currentPersona } = useAuth()
 const { 
   handleFormSubmit, 
@@ -98,7 +98,9 @@ const content = ref('')
 const selectedPersona = ref<UserPersona | null>(currentPersona.value || null)
 const attachments = ref<string[]>([])
 const isPosting = ref(false)
-const fileInput = ref<HTMLInputElement>()
+
+// Props with defaults
+const maxLength = computed(() => props.maxLength || 500)
 
 // Validation rules
 const validationRulesConfig = {
@@ -110,10 +112,6 @@ const validationRulesConfig = {
     validationRules.required('Please select a persona')
   ]
 }
-
-// Props with defaults
-const placeholder = computed(() => props.placeholder || "What's happening with your business?")
-const maxLength = computed(() => props.maxLength || 500)
 
 // Available personas from current user
 const availablePersonas = computed(() => currentUser.value?.personas || [])
@@ -127,7 +125,7 @@ const hasPersonaError = computed(() => hasFieldError('authorPersona'))
 const contentErrorMessage = computed(() => getFieldErrorMessage('content'))
 const personaErrorMessage = computed(() => getFieldErrorMessage('authorPersona'))
 
-const suggestsFinancial = computed(() => suggestsFinancialActivity(content.value))
+const suggestsFinancial = computed(() => suggestsFinancialActivityLocal(content.value))
 const canPost = computed(() => {
   return content.value.trim().length > 0 && 
          content.value.length <= maxLength.value && 
@@ -155,28 +153,7 @@ const onContentChange = () => {
   }
 }
 
-const triggerFileInput = () => {
-  fileInput.value?.click()
-}
 
-const handleFileSelect = (event: Event) => {
-  const target = event.target as HTMLInputElement
-  const files = target.files
-  
-  if (files) {
-    const newAttachments = Array.from(files).map(file => file.name)
-    attachments.value.push(...newAttachments)
-  }
-  
-  // Clear the input so the same file can be selected again
-  if (target) {
-    target.value = ''
-  }
-}
-
-const removeAttachment = (index: number) => {
-  attachments.value.splice(index, 1)
-}
 
 const handlePost = async () => {
   if (!currentUser.value || !selectedPersona.value) {

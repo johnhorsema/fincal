@@ -9,6 +9,9 @@ export default defineConfig({
       '@': resolve(__dirname, 'src'),
     },
   },
+  define: {
+    'process.env': 'process.env'
+  },
   server: {
     port: 3000,
     open: true,
@@ -30,6 +33,7 @@ export default defineConfig({
       },
     },
     rollupOptions: {
+      external: ['server/**/*'],
       output: {
         manualChunks: {
           vendor: ['vue', 'vue-router'],

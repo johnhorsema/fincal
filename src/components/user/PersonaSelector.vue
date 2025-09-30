@@ -85,7 +85,7 @@ interface Emits {
   (e: 'change', persona: UserPersona | null): void
 }
 
-const props = withDefaults(defineProps<Props>(), {
+withDefaults(defineProps<Props>(), {
   placeholder: 'Select a persona...',
   label: ''
 })

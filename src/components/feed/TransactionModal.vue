@@ -30,7 +30,7 @@
             <div class="flex items-center mt-2 text-sm text-gray-500">
               <span>{{ post?.authorPersona }}</span>
               <span class="mx-2">•</span>
-              <span>{{ formatDate(post?.createdAt) }}</span>
+              <span>{{ post?.createdAt ? formatDate(post.createdAt) : '' }}</span>
             </div>
           </div>
 
@@ -106,9 +106,9 @@
                         Account
                       </label>
                       <AccountSelector
-                        v-model="entry.accountId"
+                        :model-value="getSelectedAccount(entry.accountId)"
                         :error="entryErrors[index]?.account"
-                        @account-selected="(accountId) => handleAccountSelected(index, accountId)"
+                        @account-selected="(accountId: string) => handleAccountSelected(index, accountId)"
                       />
                     </div>
 
@@ -235,6 +235,7 @@
 <script setup lang="ts">
 import { ref, computed, watch, nextTick } from 'vue'
 import { useAuth } from '../../composables/useAuth'
+import { useAccounts } from '../../composables/useAccounts'
 import { validateTransaction, formatCurrency, formatDate, generateId } from '../../utils/validation'
 import AccountSelector from '../accounts/AccountSelector.vue'
 import type { Post, Transaction, TransactionEntry } from '../../types'
@@ -279,6 +280,7 @@ const emit = defineEmits<{
 
 // Composables
 const { currentUser } = useAuth()
+const { accountsList } = useAccounts()
 
 // Form state
 const form = ref<TransactionForm>({
@@ -367,6 +369,10 @@ const removeEntry = (index: number) => {
     form.value.entries.splice(index, 1)
     entryErrors.value.splice(index, 1)
   }
+}
+
+const getSelectedAccount = (accountId: string) => {
+  return accountsList.value.find(account => account.id === accountId) || null
 }
 
 const handleAccountSelected = (index: number, accountId: string) => {
