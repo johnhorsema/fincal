@@ -7,8 +7,8 @@
     <div class="relative">
       <button
         type="button"
-        class="relative w-full bg-white border border-gray-200 rounded-md pl-3 pr-8 py-3 text-left cursor-pointer focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-gray-900 transition-colors"
-        :class="{ 'border-red-300 focus:ring-red-500 focus:border-red-500': error }"
+        class="relative w-full bg-white border border-gray-200 rounded-md pl-3 pr-8 py-3 text-left cursor-pointer focus:outline-none focus:ring-1 focus:ring-gray-900 focus:border-gray-300 transition-colors"
+        :class="{ 'border-red-200 focus:ring-red-500 focus:border-red-300': error }"
         @click="toggleDropdown"
       >
         <div v-if="selectedPersona" class="flex items-center space-x-3">
@@ -34,12 +34,12 @@
 
       <div
         v-if="isOpen"
-        class="absolute z-10 mt-1 w-full bg-white border border-gray-200 rounded-md shadow-sm max-h-60 overflow-auto"
+        class="absolute z-10 mt-1 w-full bg-white border border-gray-100 rounded-md shadow-sm max-h-60 overflow-auto"
       >
         <div
           v-for="persona in personas"
           :key="persona.id"
-          class="cursor-pointer select-none py-3 px-3 hover:bg-gray-50 transition-colors"
+          class="cursor-pointer select-none py-3 px-3 hover:bg-gray-25 transition-colors"
           :class="{ 'bg-gray-50': selectedPersona?.id === persona.id }"
           @click="selectPersona(persona)"
         >

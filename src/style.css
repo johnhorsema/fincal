@@ -202,6 +202,62 @@
     @apply w-10 h-10 rounded-full;
   }
   
+  /* Enhanced Currency and Number Display */
+  .currency-amount {
+    @apply font-mono text-right text-gray-900 tabular-nums;
+  }
+  
+  .currency-total {
+    @apply font-mono text-gray-700 tabular-nums;
+  }
+  
+  .currency-placeholder {
+    @apply font-mono text-gray-400;
+  }
+  
+  /* Information Hierarchy Classes */
+  .content-section {
+    @apply mb-6 space-y-4;
+  }
+  
+  .transaction-section {
+    @apply mb-6;
+  }
+  
+  .section-separator {
+    @apply border-t border-gray-100 mb-4;
+  }
+  
+  .visual-grouping {
+    @apply bg-gray-50 rounded-lg border border-gray-200 overflow-hidden;
+  }
+  
+  .enhanced-table {
+    @apply bg-white rounded-md border border-gray-200 overflow-hidden;
+  }
+  
+  .table-header {
+    @apply bg-gray-50 px-4 py-3 border-b border-gray-200;
+  }
+  
+  .table-row {
+    @apply px-4 py-3 hover:bg-gray-50 transition-colors;
+  }
+  
+  /* Consistent Date Formatting */
+  .date-display {
+    @apply text-gray-900;
+  }
+  
+  .timestamp-display {
+    @apply text-gray-500;
+  }
+  
+  /* Account Type Styling */
+  .account-type-badge {
+    @apply inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-gray-100 text-gray-800 uppercase tracking-wide;
+  }
+
   /* Minimal Icon Styles - Consistent and simple */
   .icon-minimal {
     @apply w-4 h-4 text-gray-400 hover:text-gray-600 transition-colors;

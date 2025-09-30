@@ -18,9 +18,9 @@
           placeholder="E.g. 'Paid meal from credit card for 2k'"
           :maxlength="maxLength"
           rows="3"
-          class="w-full p-3 border border-gray-200 rounded-md resize-none focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-gray-900 transition-colors text-gray-900 placeholder-gray-500"
+          class="w-full p-3 border border-gray-200 rounded-md resize-none focus:outline-none focus:ring-1 focus:ring-gray-900 focus:border-gray-300 transition-colors text-gray-900 placeholder-gray-400"
           :class="{
-            'border-red-300 focus:ring-red-500 focus:border-red-500': hasContentError
+            'border-red-200 focus:ring-red-500 focus:border-red-300': hasContentError
           }"
           @input="onContentChange"
         />
@@ -40,7 +40,7 @@
           v-if="suggestsFinancial && content.trim()"
           @click="handleCreateJournal"
           :disabled="!canPost || isPosting"
-          class="inline-flex items-center px-4 py-2 border border-gray-300 rounded-md text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-gray-900 focus:ring-offset-2 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+          class="inline-flex items-center px-4 py-2 border border-gray-200 rounded-md text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-1 focus:ring-gray-900 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
         >
           + Create Journal
         </button>
@@ -50,7 +50,7 @@
         <button
           @click="handlePost"
           :disabled="!canPost || isPosting"
-          class="inline-flex items-center px-4 py-2 border border-transparent rounded-md text-sm font-medium text-white bg-gray-900 hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-900 focus:ring-offset-2 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+          class="inline-flex items-center px-4 py-2 border border-transparent rounded-md text-sm font-medium text-white bg-gray-900 hover:bg-gray-800 focus:outline-none focus:ring-1 focus:ring-gray-900 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
         >
           <span v-if="isPosting" class="flex items-center space-x-2">
             <div class="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>

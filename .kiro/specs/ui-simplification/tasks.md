@@ -28,21 +28,21 @@
   - Update button styling with proper hover states and consistent appearance
   - _Requirements: 4.1, 4.2, 4.3, 4.4, 4.5_
 
-- [-] 5. Reduce visual noise and improve color palette
+- [x] 5. Reduce visual noise and improve color palette
   - Update color scheme to use minimal colors with clean white/light gray palette
   - Replace heavy borders with subtle gray borders throughout the interface
   - Simplify icon styles to be consistent and minimal
   - Update status indicators to use subtle but clear visual cues
   - _Requirements: 5.1, 5.2, 5.3, 5.4, 5.5_
 
-- [ ] 6. Enhance information hierarchy and layout
+- [x] 6. Enhance information hierarchy and layout
   - Clearly separate post content from transaction details with visual grouping
   - Align currency amounts properly for easy comparison using monospace font
   - Format dates consistently across all components
   - Maintain consistent layout patterns for multiple transactions
   - _Requirements: 6.1, 6.2, 6.3, 6.4, 6.5_
 
-- [ ] 7. Update TransactionDetailModal for simplified editing
+- [x] 7. Update TransactionDetailModal for simplified editing
   - Simplify the transaction editing interface to match the new design system
   - Update approval status display with clear visual indicators
   - Ensure edit controls use consistent styling with other components

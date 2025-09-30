@@ -23,37 +23,46 @@
       </div>
     </div>
     
-    <!-- Post content -->
-    <div class="mb-4">
-      <p class="text-gray-900 leading-relaxed">{{ post.content }}</p>
-    </div>
-    
-    <!-- Attachments -->
-    <div v-if="post.attachments && post.attachments.length > 0" class="mb-4">
-      <div class="flex flex-wrap gap-2">
-        <div
-          v-for="attachment in post.attachments"
-          :key="attachment"
-          class="flex items-center space-x-2 bg-gray-50 px-3 py-2 rounded-md text-sm"
-        >
-          <svg class="w-4 h-4 text-gray-500" fill="currentColor" viewBox="0 0 20 20">
-            <path fill-rule="evenodd" d="M8 4a3 3 0 00-3 3v4a5 5 0 0010 0V7a1 1 0 112 0v4a7 7 0 11-14 0V7a5 5 0 0110 0v4a3 3 0 11-6 0V7a1 1 0 012 0v4a1 1 0 102 0V7a3 3 0 00-3-3z" clip-rule="evenodd" />
-          </svg>
-          <span class="text-gray-700">{{ attachment }}</span>
+    <!-- Post content section - Clear visual grouping -->
+    <div class="mb-6 space-y-4">
+      <!-- Post content -->
+      <div>
+        <p class="text-gray-900 leading-relaxed">{{ post.content }}</p>
+      </div>
+      
+      <!-- Attachments -->
+      <div v-if="post.attachments && post.attachments.length > 0">
+        <div class="flex flex-wrap gap-2">
+          <div
+            v-for="attachment in post.attachments"
+            :key="attachment"
+            class="flex items-center space-x-2 bg-gray-50 px-3 py-2 rounded-md text-sm"
+          >
+            <svg class="w-4 h-4 text-gray-500" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M8 4a3 3 0 00-3 3v4a5 5 0 0010 0V7a1 1 0 112 0v4a7 7 0 11-14 0V7a5 5 0 0110 0v4a3 3 0 11-6 0V7a1 1 0 012 0v4a1 1 0 102 0V7a3 3 0 00-3-3z" clip-rule="evenodd" />
+            </svg>
+            <span class="text-gray-700">{{ attachment }}</span>
+          </div>
         </div>
       </div>
     </div>
     
-    <!-- Transaction details (inline within card) -->
-    <div v-if="post.transactionId && transactionDetails" class="mb-4">
-      <!-- Expandable transaction section - Subtle background -->
-      <div class="bg-gray-50 rounded-lg border border-gray-100 overflow-hidden">
+    <!-- Transaction details section - Clear visual separation from post content -->
+    <div v-if="post.transactionId && transactionDetails" class="mb-6">
+      <!-- Visual separator between post content and transaction details -->
+      <div class="border-t border-gray-100 mb-4"></div>
+      
+      <!-- Expandable transaction section with enhanced visual grouping -->
+      <div class="bg-gray-50 rounded-lg border border-gray-200 overflow-hidden">
         <!-- Transaction header with expand/collapse -->
         <button
           @click="toggleTransactionDetails"
-          class="w-full p-4 flex items-center justify-between hover:bg-gray-50 transition-colors"
+          class="w-full p-4 flex items-center justify-between hover:bg-gray-100 transition-colors"
         >
           <div class="flex items-center space-x-3">
+            <svg class="w-5 h-5 text-gray-600" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M4 4a2 2 0 00-2 2v4a2 2 0 002 2V6h10a2 2 0 00-2-2H4zm2 6a2 2 0 012-2h8a2 2 0 012 2v4a2 2 0 01-2 2H8a2 2 0 01-2-2v-4zm6 4a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd" />
+            </svg>
             <h4 class="font-medium text-gray-900">Transaction Details</h4>
             <span :class="[
               'text-xs px-2 py-1 rounded-full font-medium',
@@ -73,10 +82,10 @@
           </svg>
         </button>
         
-        <!-- Expandable content -->
-        <div v-if="isTransactionExpanded" class="px-4 pb-4 border-t border-gray-100">
-          <!-- Transaction info -->
-          <div class="mb-4 pt-3">
+        <!-- Expandable content with improved layout -->
+        <div v-if="isTransactionExpanded" class="border-t border-gray-200">
+          <!-- Transaction info with consistent spacing -->
+          <div class="p-4 bg-white border-b border-gray-100">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
               <div>
                 <span class="font-medium text-gray-700">Description:</span>
@@ -89,28 +98,28 @@
             </div>
           </div>
           
-          <!-- Account entries table -->
-          <div v-if="enrichedTransactionEntries.length > 0">
-            <div class="flex items-center justify-between mb-3">
+          <!-- Account entries table with enhanced currency alignment -->
+          <div v-if="enrichedTransactionEntries.length > 0" class="p-4 bg-white">
+            <div class="flex items-center justify-between mb-4">
               <h5 class="font-medium text-gray-900">Account Entries</h5>
-              <div v-if="transactionTotals" class="text-xs text-gray-600 font-mono">
-                <span class="mr-3">Dr: {{ formatCurrency(transactionTotals.totalDebits) }}</span>
-                <span>Cr: {{ formatCurrency(transactionTotals.totalCredits) }}</span>
+              <div v-if="transactionTotals" class="text-xs text-gray-600 space-x-4">
+                <span class="font-mono">Dr: {{ formatCurrency(transactionTotals.totalDebits) }}</span>
+                <span class="font-mono">Cr: {{ formatCurrency(transactionTotals.totalCredits) }}</span>
               </div>
             </div>
             
-            <!-- Clean table layout -->
+            <!-- Enhanced table layout with proper currency alignment -->
             <div class="bg-white rounded-md border border-gray-200 overflow-hidden">
-              <!-- Table header -->
-              <div class="bg-gray-50 px-4 py-2 border-b border-gray-200">
-                <div class="grid grid-cols-12 gap-4 text-xs font-medium text-gray-700 uppercase tracking-wide">
+              <!-- Table header with consistent styling -->
+              <div class="bg-gray-50 px-4 py-3 border-b border-gray-200">
+                <div class="grid grid-cols-12 gap-4 text-xs font-semibold text-gray-700 uppercase tracking-wide">
                   <div class="col-span-6">Account</div>
                   <div class="col-span-3 text-right">Debit</div>
                   <div class="col-span-3 text-right">Credit</div>
                 </div>
               </div>
               
-              <!-- Table rows -->
+              <!-- Table rows with improved spacing and alignment -->
               <div class="divide-y divide-gray-100">
                 <div
                   v-for="entry in enrichedTransactionEntries"
@@ -118,26 +127,26 @@
                   class="px-4 py-3 hover:bg-gray-50 transition-colors"
                 >
                   <div class="grid grid-cols-12 gap-4 items-center">
-                    <!-- Account name and type -->
+                    <!-- Account name and type with consistent hierarchy -->
                     <div class="col-span-6">
-                      <div class="font-medium text-gray-900">{{ entry.accountName }}</div>
-                      <div class="text-xs text-gray-500 mt-0.5">{{ entry.accountType }}</div>
+                      <div class="font-medium text-gray-900 text-sm">{{ entry.accountName }}</div>
+                      <div class="text-xs text-gray-500 mt-0.5 uppercase tracking-wide">{{ entry.accountType }}</div>
                     </div>
                     
-                    <!-- Debit amount -->
+                    <!-- Debit amount with monospace font for proper alignment -->
                     <div class="col-span-3 text-right">
-                      <span v-if="entry.debitAmount" class="font-mono text-sm text-gray-900">
+                      <span v-if="entry.debitAmount" class="font-mono text-sm text-gray-900 tabular-nums">
                         {{ formatCurrency(entry.debitAmount) }}
                       </span>
-                      <span v-else class="text-gray-400 text-sm">—</span>
+                      <span v-else class="text-gray-400 text-sm font-mono">—</span>
                     </div>
                     
-                    <!-- Credit amount -->
+                    <!-- Credit amount with monospace font for proper alignment -->
                     <div class="col-span-3 text-right">
-                      <span v-if="entry.creditAmount" class="font-mono text-sm text-gray-900">
+                      <span v-if="entry.creditAmount" class="font-mono text-sm text-gray-900 tabular-nums">
                         {{ formatCurrency(entry.creditAmount) }}
                       </span>
-                      <span v-else class="text-gray-400 text-sm">—</span>
+                      <span v-else class="text-gray-400 text-sm font-mono">—</span>
                     </div>
                   </div>
                 </div>
@@ -148,10 +157,10 @@
       </div>
     </div>
     
-    <!-- Financial suggestion -->
-    <div v-if="!post.transactionId && suggestsFinancial" class="mb-4 p-3 bg-yellow-50 border border-yellow-200 rounded-lg">
+    <!-- Financial suggestion - Subtle visual cue -->
+    <div v-if="!post.transactionId && suggestsFinancial" class="mb-4 p-3 bg-yellow-50 rounded-lg">
       <div class="flex items-center space-x-2">
-        <svg class="w-4 h-4 text-yellow-600" fill="currentColor" viewBox="0 0 20 20">
+        <svg class="w-4 h-4 text-yellow-700" fill="currentColor" viewBox="0 0 20 20">
           <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
         </svg>
         <p class="text-sm text-yellow-800">Financial activity detected. Consider creating a journal entry.</p>
@@ -177,7 +186,7 @@
         <div v-if="post.transactionId" class="flex items-center space-x-2">
           <button
             @click="handleViewTransaction"
-            class="inline-flex items-center px-3 py-1.5 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50 transition-colors"
+            class="inline-flex items-center px-3 py-1.5 text-sm font-medium text-gray-700 bg-white border border-gray-200 rounded-md hover:bg-gray-50 transition-colors"
           >
             <svg class="w-4 h-4 mr-1.5" fill="currentColor" viewBox="0 0 20 20">
               <path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />
@@ -189,7 +198,7 @@
           <button
             v-if="transactionDetails && (transactionDetails.status === 'pending' || transactionDetails.status === 'rejected')"
             @click="handleEditTransaction"
-            class="inline-flex items-center px-3 py-1.5 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50 transition-colors"
+            class="inline-flex items-center px-3 py-1.5 text-sm font-medium text-gray-700 bg-white border border-gray-200 rounded-md hover:bg-gray-50 transition-colors"
           >
             <svg class="w-4 h-4 mr-1.5" fill="currentColor" viewBox="0 0 20 20">
               <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
@@ -319,24 +328,27 @@ const formatTimestamp = (date: Date): string => {
     } else if (days < 7) {
       return `${days}d ago`
     } else {
-      return date.toLocaleDateString()
+      // Use consistent date format
+      return formatDate(date)
     }
   }
 }
 
 const formatDate = (date: Date): string => {
-  return date.toLocaleDateString('en-US', {
+  return new Intl.DateTimeFormat('en-US', {
     year: 'numeric',
     month: 'short',
     day: 'numeric'
-  })
+  }).format(date)
 }
 
 const formatCurrency = (amount: number): string => {
-  return `USD ${new Intl.NumberFormat('en-US', {
+  return new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
     minimumFractionDigits: 2,
     maximumFractionDigits: 2
-  }).format(amount)}`
+  }).format(amount)
 }
 
 const toggleTransactionDetails = () => {
